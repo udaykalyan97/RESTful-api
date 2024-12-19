@@ -150,10 +150,11 @@ app.delete("/user/:id", (req, res) => {
                 
     const filteredUsers = users.filter((user) => user.id !== userId);                           // Filter out the user from the users array based on the ID
 
+    users.length = 0;                                                                           // Clear the current users array
+    users.push(...filteredUsers);                                                               // Add all the remaining users back into the users array
+    
     res.status(200).json({ 
         message: "User Deleted",                                                                // Success message
         users: filteredUsers                                                                    // List of users after deletion
     });
 });
-
-
